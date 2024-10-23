@@ -13,7 +13,13 @@ public class WebConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOriginPatterns("*");
+                registry.addMapping("/*")
+                        .allowedOrigins("http://localhost:3000")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE")
+                        .allowCredentials(true)  // 이 부분이 Access-Control-Allow-Credentials 헤더를 true로 설정함
+                        .allowedHeaders("")
+                        .exposedHeaders("Authorization")
+                        .maxAge(3600);
             }
         };
     }
